@@ -1,7 +1,7 @@
 import { prisma } from "./lib/prisma.js";
 
 // A `main` function so that you can use async/await
-async function createUser(name,password, role) {
+async function createUser(name, password, role) {
   // Create user, posts, and categories
   const user = await prisma.user.create({
     data: {
@@ -21,4 +21,13 @@ async function getUser(username) {
   });
   return user;
 }
-export { createUser, getUser };
+
+async function getUserById(id) {
+  const user = await prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+  return user;
+}
+export { createUser, getUser, getUserById };
