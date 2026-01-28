@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/app.css" />
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <header class="nav">
+      <a href="/home">Home</a> <a href="/login">Login</a>
+    </header>
+    <h1>Sign Up</h1>
+
+    <form action="/sign-up" method="POST">
+      <% errors.forEach((error)=>{%> <%- include('error',{error}); %> <%});%>
+      <label for="username"
+        >Username: <input type="text" name="username" required id="username"
+      /></label>
+      <label for="password"
+        >Password:
+        <input required id="password" name="password" type="password"
+      /></label>
+
+      <label for="passwordConfirmation"
+        >Confirm password:
+        <input
+          required
+          type="password"
+          name="passwordConfirmation"
+          id="passwordConfirmation"
+      /></label>
+      <label for="adminPasscode">
+        Admin Passcode (Admins only):
+        <input type="password" name="adminPasscode" id="adminPasscode"
+      /></label>
+      <button type="submit">Sign Up</button>
+    </form>
+  </body>
+</html>

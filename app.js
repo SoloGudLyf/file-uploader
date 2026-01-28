@@ -8,17 +8,12 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcryptjs";
-import { pool } from "./db/pool.js";
-import pgSession from "connect-pg-simple";
 import expressSession from "express-session";
 import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg"; // For other db adapters, see Prisma docs
-import { PrismaClient } from "../../generated/prisma/client";
+import { PrismaClient } from "./db/generated/prisma/client.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
-
-const pool = new Pool({
-  // add your configuration
-});
+import { indexRouter } from "./routes/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,8 +21,6 @@ const __dirname = path.dirname(__filename);
 const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-
-const PostgreSqlStore = pgSession(session);
 
 // DATABASE_URL defined in env file included in prisma.config.js; see Prisma docs
 const connectionString = `${process.env.DATABASE_URL}`;
